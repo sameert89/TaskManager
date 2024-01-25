@@ -11,16 +11,20 @@ namespace TaskManager
     {
         static void Main()
         {
-            ServiceLocator.Register<IPrinter>(new Printer());
-            ServiceLocator.Register<IScanner>(new Scanner());
+            
             Printer printerObj = new Printer();
             Scanner scannerObj = new Scanner();
+            ServiceLocator.Register<IPrinter>(printerObj);
+            ServiceLocator.Register<IScanner>(scannerObj);
+
             PrintScanner printScannerObj = new PrintScanner();
 
             TaskManager.ExecutePrintTask(printerObj, "Test.doc");
             TaskManager.ExecuteScanTask(scannerObj, "MyImage.png");
             TaskManager.ExecutePrintTask(printScannerObj, "NewDoc.doc");
             TaskManager.ExecuteScanTask(printScannerObj, "YourImage.png");
+
+            Console.ReadLine();
         }
     }
 }
